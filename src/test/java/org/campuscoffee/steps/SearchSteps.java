@@ -1,5 +1,6 @@
 package org.campuscoffee.steps;
 import io.cucumber.java.ParameterType;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -47,6 +48,23 @@ public class SearchSteps {
     @Then("the System should show {string} as the one with cheaper coffee")
     public void checkOutput(final String storeName) {
         assertEquals(output.getName(), storeName);
+    }
+
+    @Then("there should only be {int} registered Coffeeshop")
+    public void registeredShop(int ammount) {
+        assertEquals(search.getAllStores().size(), ammount);
+    }
+    @And("it's name should be {String}")
+    public void ShopName(String name) {
+        boolean store_exists = false;
+        var stores = search.getAllStores()
+        for(var store : stores){
+            if (store.getName().equals(name)){
+                store_exists = true;
+                break;
+            }
+        }
+        assertTrue(store_exists);
     }
 
 }
